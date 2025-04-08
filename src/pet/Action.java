@@ -8,5 +8,6 @@ public enum Action {
   FEED,
   PLAY,
   CLEAN,
-  SLEEP
+  SLEEP,
+  HUG
 }

@@ -6,5 +6,6 @@ package pet;
 
 public enum MoodEnum {
   HAPPY,
-  SAD
+  SAD,
+  ANXIETY
 }

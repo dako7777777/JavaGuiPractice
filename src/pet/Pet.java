@@ -1,5 +1,7 @@
 package pet;
 
+import java.util.Random;
+
 /**
  * Main Pet class implementing the PetInterface.
  * This class represents a virtual pet with various needs and moods.
@@ -19,6 +21,9 @@ public class Pet implements PetInterface {
 
   // Strategy pattern for mood-based behavior
   private MoodStrategy moodStrategy;
+
+  // Random number generator for anxiety check
+  private final Random random = new Random();
 
   /**
    * Constructor that initializes the pet with default values.
@@ -52,6 +57,9 @@ public class Pet implements PetInterface {
     MoodEnum newMood = moodStrategy.moodModifier(this);
     setMood(newMood);
 
+    // Random chance to become anxious if not already
+    checkAnxiety();
+
     // Check if pet should die
     checkDeath();
   }
@@ -71,6 +79,9 @@ public class Pet implements PetInterface {
     // Check and update mood after interaction
     MoodEnum newMood = moodStrategy.moodModifier(this);
     setMood(newMood);
+
+    // Random chance to become anxious if not already
+    checkAnxiety();
 
     // Check if pet should die after interaction
     checkDeath();
@@ -92,10 +103,18 @@ public class Pet implements PetInterface {
     this.mood = mood;
 
     // Update strategy based on mood
-    if (mood == MoodEnum.HAPPY) {
-      this.moodStrategy = new HappyMoodStrategy();
-    } else {
-      this.moodStrategy = new SadMoodStrategy();
+    switch (mood) {
+      case HAPPY:
+        this.moodStrategy = new HappyMoodStrategy();
+        break;
+      case SAD:
+        this.moodStrategy = new SadMoodStrategy();
+        break;
+      case ANXIETY:
+        this.moodStrategy = new AnxietyMoodStrategy();
+        break;
+      default:
+        throw new IllegalStateException("Unexpected mood: " + mood);
     }
   }
 
@@ -114,6 +133,22 @@ public class Pet implements PetInterface {
     // Pet dies if both hunger and sleep are critically high
     if (hunger > 95 && sleep > 95) {
       dead = true;
+    }
+  }
+
+  /**
+   * Checks if the pet should become anxious based on its current status.
+   */
+  private void checkAnxiety() {
+    // Only check if not already anxious
+    if (mood != MoodEnum.ANXIETY) {
+      boolean badCondition = hunger > 60 && sleep > 60;
+      int maxProbability = badCondition ? 50 : 20;
+
+      // Random chance based on condition
+      if (random.nextInt(100) < maxProbability) {
+        setMood(MoodEnum.ANXIETY);
+      }
     }
   }
 
