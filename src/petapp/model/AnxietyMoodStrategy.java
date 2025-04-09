@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 import java.util.Random;
 

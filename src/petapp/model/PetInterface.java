@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 /**
  * Official pet interface.

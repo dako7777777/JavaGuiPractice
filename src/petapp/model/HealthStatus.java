@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 /**
  * Class to encapsulate the pet's health-related data.

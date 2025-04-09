@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 /**
  * Enumeration representing different types of interactions with the pet.

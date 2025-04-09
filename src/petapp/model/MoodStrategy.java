@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 /**
  * Interface for the Strategy pattern that defines behaviors based on the pet's mood.

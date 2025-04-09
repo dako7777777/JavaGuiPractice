@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 /**
  * Enumeration for the pet's mood states.

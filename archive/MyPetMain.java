@@ -1,12 +1,14 @@
-import pet.Action;
-import pet.MoodEnum;
-import pet.Pet;
-import pet.PetInterface;
+package resources;
+
+import petapp.model.Action;
+import petapp.model.MoodEnum;
+import petapp.model.Pet;
+import petapp.model.PetInterface;
 
 import java.util.Scanner;
 
 /**
- * The MyPetMain class is the entry point for the Virtual Pet Care application.
+ * The resources.MyPetMain class is the entry point for the Virtual Pet Care application.
  * It allows users to interact with a virtual pet by issuing commands to
  * play, feed, clean, put to sleep, or advance the pet's state.
  */

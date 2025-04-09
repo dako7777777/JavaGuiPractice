@@ -1,4 +1,4 @@
-package pet;
+package petapp.model;
 
 /**
  * Implementation of the MoodStrategy for a sad pet.
