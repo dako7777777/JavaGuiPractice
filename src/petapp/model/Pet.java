@@ -6,7 +6,6 @@ import java.util.Random;
  * Main Pet class implementing the PetInterface.
  * This class represents a virtual pet with various needs and moods.
  */
-
 public class Pet implements PetInterface {
   // Health status fields, representing different need.
   // All between 0-100 and the lower, the better.
@@ -23,12 +22,21 @@ public class Pet implements PetInterface {
   private MoodStrategy moodStrategy;
 
   // Random number generator for anxiety check
-  private final Random random = new Random();
+  private final Random random;
 
   /**
-   * Constructor that initializes the pet with default values.
+   * Default constructor that initializes the pet with default values.
    */
   public Pet() {
+    this(new Random());
+  }
+
+  /**
+   * Test constructor that allows injecting a Random for testing.
+   *
+   * @param random The Random instance to use
+   */
+  public Pet(Random random) {
     // Initialize with default values from document
     this.hunger = 20;
     this.hygiene = 60;
@@ -36,9 +44,19 @@ public class Pet implements PetInterface {
     this.sleep = 15;
     this.mood = MoodEnum.HAPPY;
     this.dead = false;
+    this.random = random;
 
     // Default to happy mood strategy
     this.moodStrategy = new HappyMoodStrategy();
+  }
+
+  /**
+   * Setter for the mood strategy to make testing easier.
+   *
+   * @param moodStrategy The mood strategy to set
+   */
+  public void setMoodStrategy(MoodStrategy moodStrategy) {
+    this.moodStrategy = moodStrategy;
   }
 
   /**
@@ -111,7 +129,7 @@ public class Pet implements PetInterface {
         this.moodStrategy = new SadMoodStrategy();
         break;
       case ANXIETY:
-        this.moodStrategy = new AnxietyMoodStrategy();
+        this.moodStrategy = new AnxietyMoodStrategy(random);
         break;
       default:
         throw new IllegalStateException("Unexpected mood: " + mood);
@@ -153,7 +171,6 @@ public class Pet implements PetInterface {
   }
 
   // Getter and setter methods for health status fields
-
   public int getHunger() {
     return hunger;
   }
@@ -188,5 +205,12 @@ public class Pet implements PetInterface {
 
   public boolean isDead() {
     return dead;
+  }
+
+  /**
+   * Get the current mood strategy (for testing).
+   */
+  public MoodStrategy getMoodStrategy() {
+    return moodStrategy;
   }
 }

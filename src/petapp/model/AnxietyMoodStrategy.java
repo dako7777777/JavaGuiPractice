@@ -6,8 +6,24 @@ import java.util.Random;
  * Implementation of the MoodStrategy for an anxious pet.
  */
 public class AnxietyMoodStrategy implements MoodStrategy {
-  private final Random random = new Random();
+  private final Random random;
   private boolean hugApplied = false;
+
+  /**
+   * Default constructor that uses a standard Random instance.
+   */
+  public AnxietyMoodStrategy() {
+    this(new Random());
+  }
+
+  /**
+   * Test constructor that allows injecting a Random for testing.
+   *
+   * @param random The Random instance to use
+   */
+  public AnxietyMoodStrategy(Random random) {
+    this.random = random;
+  }
 
   @Override
   public void applyAction(Pet pet, Action action) {
@@ -104,5 +120,12 @@ public class AnxietyMoodStrategy implements MoodStrategy {
 
     // Otherwise, stay anxious
     return MoodEnum.ANXIETY;
+  }
+
+  /**
+   * For testing: get the hug applied status
+   */
+  boolean isHugApplied() {
+    return hugApplied;
   }
 }
