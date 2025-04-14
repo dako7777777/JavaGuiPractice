@@ -1,13 +1,16 @@
 package petapp.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,9 +22,8 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.BorderFactory;
 import petapp.model.MoodEnum;
-import java.io.InputStream;
+
 
 /**
  * The PetView class represents the graphical user interface for the Virtual Pet application.
@@ -62,7 +64,7 @@ public class PetView extends JFrame {
     setLayout(new BorderLayout(10, 10));
 
     // Top panel for exit button and health summary
-    JPanel topPanel = new JPanel(new BorderLayout());
+    final JPanel topPanel = new JPanel(new BorderLayout());
 
     // Exit button on the top right
     exitButton = new JButton("Exit");
@@ -116,7 +118,9 @@ public class PetView extends JFrame {
     centerPanel.add(imageLabel, BorderLayout.CENTER);
 
     // Dead message (only visible when pet is dead)
-    deadMessageLabel = new JLabel("What kills you makes you more dead. R.I.P my virtual friend!", SwingConstants.CENTER);
+    deadMessageLabel =
+        new JLabel("What kills you makes you more dead. R.I.P my virtual friend!",
+            SwingConstants.CENTER);
     deadMessageLabel.setFont(new Font("Arial", Font.BOLD, 14));
     deadMessageLabel.setForeground(Color.RED);
     deadMessageLabel.setVisible(false);
@@ -165,7 +169,9 @@ public class PetView extends JFrame {
     buttonPanel.add(stepButton);
 
     // Add instructions about right-clicking mood
-    JLabel instructionLabel = new JLabel("Right-click on mood to change (Dev only)", SwingConstants.CENTER);
+    JLabel instructionLabel =
+        new JLabel("Right-click on mood to change (Dev only)",
+            SwingConstants.CENTER);
     instructionLabel.setFont(new Font("Arial", Font.ITALIC, 10));
 
     JPanel bottomControlPanel = new JPanel(new BorderLayout(5, 5));
@@ -194,7 +200,8 @@ public class PetView extends JFrame {
     updateImage("HAPPY");
 
     // Add initial welcome message
-    addMessage("Welcome to Virtual Pet! Press 'Step' to advance time or use actions to interact with your pet.");
+    addMessage("Welcome to Virtual Pet! "
+        + "Press 'Step' to advance time or use actions to interact with your pet.");
 
     setLocationRelativeTo(null); // Center on screen
     setVisible(true);
@@ -222,6 +229,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the feed button for attaching listeners.
+   * @return the feed button component that controls feeding functionality
    */
   public JButton getFeedButton() {
     return feedButton;
@@ -229,6 +237,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the play button for attaching listeners.
+   * @return the playButton button.
    */
   public JButton getPlayButton() {
     return playButton;
@@ -236,6 +245,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the clean button for attaching listeners.
+   * @return the playButton cleanButton.
    */
   public JButton getCleanButton() {
     return cleanButton;
@@ -243,6 +253,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the sleep button for attaching listeners.
+   * @return the  sleepButton cleanButton.
    */
   public JButton getSleepButton() {
     return sleepButton;
@@ -250,6 +261,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the hug button for attaching listeners.
+   * @return the  hugButton cleanButton.
    */
   public JButton getHugButton() {
     return hugButton;
@@ -257,6 +269,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the step button for attaching listeners.
+   * @return the  stepButton cleanButton.
    */
   public JButton getStepButton() {
     return stepButton;
@@ -264,6 +277,7 @@ public class PetView extends JFrame {
 
   /**
    * Returns the exit button for attaching listeners.
+   * @return the  exitButton cleanButton.
    */
   public JButton getExitButton() {
     return exitButton;
@@ -271,13 +285,14 @@ public class PetView extends JFrame {
 
   /**
    * Adds a message to the message area.
+   * @param message send to user.
    */
   public void addMessage(String message) {
     // Check if this is a new message group (starts with a special character)
-    boolean isNewGroup = message.startsWith("\n") ||
-        message.contains("HINTS") ||
-        message.contains("MOOD CHANGED") ||
-        message.startsWith("▬");
+    boolean isNewGroup = message.startsWith("\n")
+        || message.contains("HINTS")
+        || message.contains("MOOD CHANGED")
+        || message.startsWith("▬");
 
     // If it's a new message group but doesn't start with newline, add one
     if (isNewGroup && !message.startsWith("\n")) {
@@ -293,6 +308,7 @@ public class PetView extends JFrame {
 
   /**
    * Attaches a listener to all mood menu items.
+   * @param listener the ActionListener to be attached to each mood menu item.
    */
   public void setMoodMenuItemListener(java.awt.event.ActionListener listener) {
     for (int i = 0; i < moodMenu.getComponentCount(); i++) {
@@ -304,13 +320,14 @@ public class PetView extends JFrame {
 
   /**
    * Sets the pet's mood and updates both the mood label and the displayed image.
+   * @param mood the String representing the pet's mood state (e.g., "HAPPY", "SAD", "DEAD").
    */
   public void setMood(String mood) {
     updateMood(mood);
     updateImage(mood);
 
     // Check if pet is dead
-    if (mood.equals("DEAD")) {
+    if ("DEAD".equals(mood)) {
       setPetDead();
     }
   }
@@ -318,11 +335,12 @@ public class PetView extends JFrame {
   /**
    * Updates the pet's image based on the specified mood.
    * Loads the appropriate image file from resources.
+   * @param mood the String representing the pet's mood state (e.g., "HAPPY", "SAD", "DEAD").
    */
   public void updateImage(String mood) {
     String lowerMood = mood.toLowerCase();
     // Convert DEAD special case
-    if (lowerMood.equals("dead")) {
+    if ("dead".equals(lowerMood)) {
       lowerMood = "dead";
     }
 
@@ -350,7 +368,7 @@ public class PetView extends JFrame {
           imageLabel.setText("Pet Image (" + mood + ")");
         }
       }
-    } catch (Exception e) {
+    } catch (IOException e) {
       System.err.println("Error loading image: " + e.getMessage());
       imageLabel.setText("Pet Image (" + mood + ")");
     }
@@ -358,26 +376,28 @@ public class PetView extends JFrame {
 
   /**
    * Updates the mood label with the specified text.
+   * @param moodText the String representing the pet's mood state (e.g., "HAPPY", "SAD", "DEAD").
    */
   public void updateMood(String moodText) {
     moodLabel.setText("Mood: " + moodText);
 
     // Change color based on mood
-    if (moodText.equals("HAPPY")) {
-      moodLabel.setForeground(new Color(0, 150, 0)); // Green
-    } else if (moodText.equals("SAD")) {
-      moodLabel.setForeground(new Color(150, 0, 0)); // Red
-    } else if (moodText.equals("ANXIETY")) {
-      moodLabel.setForeground(new Color(200, 150, 0)); // Orange
-    } else if (moodText.equals("DEAD")) {
-      moodLabel.setForeground(Color.BLACK);
-    } else {
-      moodLabel.setForeground(Color.BLACK);
+    switch (moodText) {
+      case "HAPPY" -> moodLabel.setForeground(new Color(0, 150, 0)); // Green
+      case "SAD" -> moodLabel.setForeground(new Color(150, 0, 0)); // Red
+      case "ANXIETY" -> moodLabel.setForeground(new Color(200, 150, 0)); // Orange
+      case "DEAD" -> moodLabel.setForeground(Color.BLACK);
+      default -> moodLabel.setForeground(Color.BLACK);
     }
   }
 
   /**
    * Updates the health label and progress bars with the specified health status.
+   * @param hunger the hunger level of the pet (0-100, where lower is better)
+   * @param hygiene the hygiene level of the pet (0-100, where lower is better)
+   * @param social the social level of the pet (0-100, where lower is better)
+   * @param sleep the sleep level of the pet (0-100, where lower is better)
+   * @param alive indicates whether the pet is alive (true) or dead (false)
    */
   public void updateHealth(int hunger, int hygiene, int social, int sleep, boolean alive) {
     String healthText = String.format("Pet Status: %s", alive ? "Alive" : "Dead");
@@ -401,6 +421,8 @@ public class PetView extends JFrame {
   /**
    * Updates a progress bar with a value and sets appropriate colors.
    * Since lower values are better in this game, colors are reversed.
+   * @param bar the JProgressBar component to update
+   * @param value the value to set for the progress bar (0-100)
    */
   private void updateProgressBar(JProgressBar bar, int value) {
     bar.setValue(value);
@@ -419,6 +441,7 @@ public class PetView extends JFrame {
 
   /**
    * Sets the visibility of the hug button.
+   * @param visible true to make the hug button visible, false to hide it
    */
   public void setHugButtonVisible(boolean visible) {
     hugButton.setVisible(visible);

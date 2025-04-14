@@ -84,10 +84,18 @@ public class AnxietyMoodStrategy implements MoodStrategy {
   public MoodEnum moodModifier(Pet pet) {
     // Count how many health stats are under 50
     int lowStatusCount = 0;
-    if (pet.getHunger() < 50) lowStatusCount++;
-    if (pet.getSocial() < 50) lowStatusCount++;
-    if (pet.getHygiene() < 50) lowStatusCount++;
-    if (pet.getSleep() < 50) lowStatusCount++;
+    if (pet.getHunger() < 50) {
+      lowStatusCount++;
+    }
+    if (pet.getSocial() < 50) {
+      lowStatusCount++;
+    }
+    if (pet.getHygiene() < 50) {
+      lowStatusCount++;
+    }
+    if (pet.getSleep() < 50) {
+      lowStatusCount++;
+    }
 
     // If any 3 of the health statuses are under 50, anxiety disappears
     if (lowStatusCount >= 3) {

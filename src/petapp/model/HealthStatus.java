@@ -9,13 +9,15 @@ public record HealthStatus(MoodEnum mood, boolean dead,
 
   @Override
   public String toString() {
-    return "HealthStatus{"
-        + "mood = " + mood
-        + ", alive = " + !dead
-        + ", hunger = " + hunger
-        + ", hygiene = " + hygiene
-        + ", social = " + social
-        + ", sleep = " + sleep
-        + '}';
+    StringBuilder sb = new StringBuilder();
+    sb.append("HealthStatus{")
+        .append("mood = ").append(mood)
+        .append(", alive = ").append(!dead)
+        .append(", hunger = ").append(hunger)
+        .append(", hygiene = ").append(hygiene)
+        .append(", social = ").append(social)
+        .append(", sleep = ").append(sleep)
+        .append('}');
+    return sb.toString();
   }
 }
