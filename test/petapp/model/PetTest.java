@@ -1,10 +1,17 @@
 package petapp.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 import petapp.test.TestRandom;
 
+/**
+ * Tests for the PetTest.
+ */
 public class PetTest {
   private Pet pet;
   private TestRandom testRandom;
@@ -117,8 +124,8 @@ public class PetTest {
     // Save current values
     int hunger = pet.getHunger();
     int hygiene = pet.getHygiene();
-    int social = pet.getSocial();
-    int sleep = pet.getSleep();
+    final int social = pet.getSocial();
+    final int sleep = pet.getSleep();
 
     // Try to step
     pet.step();
@@ -140,8 +147,8 @@ public class PetTest {
     // Save current values
     int hunger = pet.getHunger();
     int hygiene = pet.getHygiene();
-    int social = pet.getSocial();
-    int sleep = pet.getSleep();
+    final int social = pet.getSocial();
+    final int sleep = pet.getSleep();
 
     // Try to interact
     pet.interactWith(Action.FEED);

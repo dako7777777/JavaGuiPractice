@@ -59,7 +59,7 @@ public class PetView extends JFrame {
    */
   public PetView() {
     setTitle("Virtual Pet");
-    setSize(700, 600);
+    setSize(700, 800);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout(10, 10));
 
@@ -133,7 +133,7 @@ public class PetView extends JFrame {
     bottomPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 10, 10));
 
     // Message area for feedback
-    messageArea = new JTextArea(4, 40);
+    messageArea = new JTextArea(10, 40);
     messageArea.setEditable(false);
     messageArea.setLineWrap(true);
     messageArea.setWrapStyleWord(true);

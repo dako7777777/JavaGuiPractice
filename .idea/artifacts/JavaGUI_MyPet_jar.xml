@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JavaGUI_MyPet:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaGUI_MyPet_jar</output-path>
+    <root id="archive" name="JavaGUI_MyPet.jar">
+      <element id="module-output" name="JavaGUI_MyPet" />
+    </root>
+  </artifact>
+</component>

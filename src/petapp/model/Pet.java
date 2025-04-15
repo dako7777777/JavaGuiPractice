@@ -209,6 +209,7 @@ public class Pet implements PetInterface {
 
   /**
    * Get the current mood strategy (for testing).
+   * @return return the current mood strategy.
    */
   public MoodStrategy getMoodStrategy() {
     return moodStrategy;

@@ -1,15 +1,22 @@
 package petapp.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import petapp.test.TestRandom;
 
+/**
+ * Tests for the AnxietyMoodStrategy.
+ */
 public class AnxietyMoodStrategyTest {
   private Pet pet;
   private TestRandom testRandom;
   private AnxietyMoodStrategy strategy;
 
+  /**
+   * Construct AnxietyMood.
+   */
   @Before
   public void setUp() {
     // Create a testable Random object

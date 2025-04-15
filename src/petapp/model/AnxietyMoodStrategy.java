@@ -123,7 +123,7 @@ public class AnxietyMoodStrategy implements MoodStrategy {
   }
 
   /**
-   * For testing: get the hug applied status
+   * For testing: get the hug applied status.
    */
   boolean isHugApplied() {
     return hugApplied;
